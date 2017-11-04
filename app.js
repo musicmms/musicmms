@@ -1,10 +1,8 @@
 const express = require('express');
-
 const app = express();
+const routes = require('./routes/index');
 
-app.get('/', (req, res) => {
-    res.send('go away you should be somehwere else');
-});
+app.use('/', routes);
 
 app.listen(1337, (err) => {
     if(err) console.log(err)
