@@ -4,7 +4,7 @@ const routes = require('./routes/index');
 
 app.use('/', routes);
 
-app.listen(1337, (err) => {
+app.listen(process.env.PORT || 1337, (err) => {
     if(err) console.log(err)
     else console.log("Listening on port 1337")
 })
