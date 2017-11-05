@@ -15,9 +15,3 @@ exports.downloadVideo = (vlink) => {
     video.pipe(fs.createWriteStream('/res/video/' + info.filename + '.mp4')); 
 }
 
-exports.searchVideo = (title, opts, cb) => {
-    search(title, opts, (err, results) => {
-        if(err) return console.log(err);
-        else cb(results)
-    })
-}
