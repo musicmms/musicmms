@@ -50,7 +50,7 @@ exports.receivemsg = async(req, res) => {
     }
 
   }).pipe(fs.createWriteStream(audioOutput)).on('finish', () => {
-    var command = ffmpeg('/app/res/audio' + videoName).format('mp3');
+    var command = ffmpeg('/app/res/audio/' + videoName).format('mp3');
     command.save('/app/res/audio/' + videoName + 'done.mp3');
     const twiml = new VoiceResponse();
     twiml.play('http://musicmms.herokuapp.com/song/' + videoName + 'done.mp3');
