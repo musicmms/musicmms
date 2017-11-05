@@ -39,7 +39,7 @@ exports.receivemsg = async(req, res) => {
   const searchTerm = req.body.Body;
   let result = await searcher.search(searchTerm, {type: 'video'});
   let videoLink = result.first.url;
-  let videoName = "hi";
+  let videoName = uuidv4();
   let fileName = '/app/res/video/' + videoName + '.mp4';
   const audioOutput = '/app/res/audio/' + videoName + '.mp3';
   const mainOutput = '/app/res/audio/' + uuidv4() + '.mp3';
@@ -48,10 +48,11 @@ exports.receivemsg = async(req, res) => {
     filter: format => {
       return format.container === 'mp4' && !format.encoding;
     }
+    const
   }).pipe(fs.createWriteStream(audioOutput)).on('finish', () => {
 
-    var twiml = new VoiceResponse();
-    twiml.play('http://musicmms.herokuapp.com/song/' + videoName + '.mp3');
+    const twiml = new VoiceResponse();
+    twiml.play('http://vipmusic.info/siteuploads/files/sfd51/25401/Shape%20Of%20You%20-%20Mercy%20(Akasa%20Singh)%20-%20128%20Kbps(VipMusic.In).mp3' + videoName + '.mp3');
     console.log('http://musicmms.herokuapp.com/song/' + videoName + '.mp3')
     console.log(twiml.toString())
     // Render the response as XML in reply to the webhook request
