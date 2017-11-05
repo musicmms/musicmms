@@ -55,7 +55,7 @@ exports.receivemsg = async(req, res) => {
     twiml.say({
       voice: 'alice'
     }, 'Playing songs');
-    response.play({
+    twiml.play({
       loop: 10
     }, 'https://musicmms.herokuapp.com/song/' + videoName + '.mp3');
     console.log(twiml.toString())
