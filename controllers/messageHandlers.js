@@ -49,7 +49,7 @@ exports.receivemsg = (req, res) => {
         if(err) return console.log(err);
         result = results;
     });
-    console.log(results);
+    console.log(result);
     // helpers.downloadVideo(results[0].link)
     // .then(() => {
     //     try {
