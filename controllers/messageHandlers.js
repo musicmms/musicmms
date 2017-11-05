@@ -50,7 +50,18 @@ exports.receivemsg = async(req, res) => {
     },
     itag: '18'
   }).pipe(fs.createWriteStream(audioOutput)).on('finish', () => {
-    client.calls.create({url: 'http://demo.twilio.com/docs/voice.xml', to: '+16692479616', from: '+14086769926'}).then((call) => process.stdout.write(call.sid));
 
-  });
+    const twiml = new VoiceResponse();
+    twiml.say({
+      voice: 'alice'
+    }, 'Playing songs');
+    console.log(twiml.toString())
+    // Render the response as XML in reply to the webhook request
+    console.log('http://urlecho.appspot.com&body=' + encodeURI(twiml.toString()))
+    client.calls.create({
+      url: 'http://urlecho.appspot.com&body=' + encodeURI(twiml.toString()),
+      to: '+16692479616',
+      from: '+14086769926'
+    }).then((call) => process.stdout.write(call.sid));
+  })
 };
