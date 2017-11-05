@@ -48,23 +48,24 @@ exports.receivemsg = (req, res) => {
         if(err) return console.log(err);
         return results;
     });
-    helpers.downloadVideo(results[0].link)
-    .then(() => {
-        try {
-            const process = new ffmpeg('/res/video/' + results[0].title)
-            process.then(function (video) {
-                video.fnExtractSoundToMP3('/res/audio/' + results[0].title + '.mp3', function (error, file) {
-                    if (!error) console.log('Audio file: ' + file);
-                });
-            }, function (err) {
-                console.log('Error: ' + err);
-            });
-        } catch (e) {
-            console.log(e.code);
-            console.log(e.msg);
-        }
-        fs.unlink('../res/video/' + results[0].link)
-        console.log(req.body.Body)
-    })
+    console.log(results);
+    // helpers.downloadVideo(results[0].link)
+    // .then(() => {
+    //     try {
+    //         const process = new ffmpeg('/res/video/' + results[0].title)
+    //         process.then(function (video) {
+    //             video.fnExtractSoundToMP3('/res/audio/' + results[0].title + '.mp3', function (error, file) {
+    //                 if (!error) console.log('Audio file: ' + file);
+    //             });
+    //         }, function (err) {
+    //             console.log('Error: ' + err);
+    //         });
+    //     } catch (e) {
+    //         console.log(e.code);
+    //         console.log(e.msg);
+    //     }
+    //     fs.unlink('../res/video/' + results[0].link)
+    //     console.log(req.body.Body)
+    // })
 }
 
