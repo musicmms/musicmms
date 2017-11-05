@@ -1,0 +1,6 @@
+<Response>
+<Say voice="alice">Thanks for trying our documentation. Enjoy!</Say>
+<Play>
+http://musicmms.herokuapp.com+4612f61-c45e-4f4b-8774-a4b61928b050c.mp
+</Play>
+</Response>
