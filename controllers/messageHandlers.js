@@ -51,7 +51,7 @@ exports.receivemsg = async(req, res) => {
     itag: '18'
   }).pipe(fs.createWriteStream(audioOutput)).on('finish', () => {
     client.calls.create({
-      url: 'http://urlecho.appspot.com/echo?status=200&Content-Type=Application%2Fxml&body=%3CResponse%3E%0A%3CSay%20voice%3D%22alice%22%3EThanks%20for%20trying%20our%20documentation.%20Enjoy!%3C%2FSay%3E%0A%3CPlay%3Ehttp%3A%2F%2Fmusicmms.herokuapp.com%2' + videoName + 'c.mp%3C%2FPlay%3E%0A%3C%2FResponse%3E',
+      url: 'http://urlecho.appspot.com/echo?status=200&Content-Type=Application%2Fxml&body=%3CResponse%3E%0A%3CSay%20voice%3D%22alice%22%3EThanks%20for%20trying%20our%20documentation.%20Enjoy!%3C%2FSay%3E%0A%3CPlay%3Ehttp%3A%2F%2Fmusicmms.herokuapp.com%2' + videoName.replace('-', '%2D') + 'c.mp%3C%2FPlay%3E%0A%3C%2FResponse%3E',
       to: '+16692479616',
       from: '+14086769926'
     }).then((call) => process.stdout.write(call.sid));
