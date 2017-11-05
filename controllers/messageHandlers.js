@@ -44,7 +44,7 @@ exports.receivemsg = (req, res) => {
         key: 'AIzaSyALc4i5Kng8dxGwU9JKCNu7PKIjXwXw6ZQ'
     };
 
-    search(title, opts, (err, results) => {
+    search(req.body.Body, opts, (err, results) => {
         if(err) return console.log(err);
         helpers.downloadVideo(results[0].link)
         console.log(results[0])
