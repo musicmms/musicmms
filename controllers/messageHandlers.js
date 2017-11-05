@@ -47,9 +47,8 @@ exports.receivemsg = (req, res) => {
     var result;
     search(req.body.Body, opts, (err, results) => {
         if(err) return console.log(err);
-        result = results;
+        console.log(results);
     });
-    console.log(result);
     // helpers.downloadVideo(results[0].link)
     // .then(() => {
     //     try {
