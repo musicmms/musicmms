@@ -13,6 +13,7 @@ const ytdl = require('ytdl-core');
 const uuidv4 = require('uuid/v4');
 const path = require('path');
 const converter = require('video-converter')
+const VoiceResponse = require('twilio').twiml.VoiceResponse;
 const {spawn} = require('child_process')
 
 exports.sendmsg = (req, res) => {
@@ -49,11 +50,14 @@ exports.receivemsg = async(req, res) => {
     },
     itag: '18'
   }).pipe(fs.createWriteStream(audioOutput)).on('finish', () => {
-    const fileStats = fs.statSync(audioOutput);
-    if (fileStats.size > 2000000) {
-      client.messages.create({body: `File size too big. Please enter a song that is less than 4 minutes long or be more specific in your search to find what you want.`, to: req.body.From, from: '+14086769926'})
-    } else {
-      client.messages.create({body: `You asked for ${req.body.Body}. We found this.`, to: req.body.From, from: '+14086769926', mediaUrl: `http://musicmms.herokuapp.com/song/${videoName}.mp3`}).then((message) => process.stdout.write(message.sid));
-    }
+    const response = new VoiceResponse();
+    response.play({
+      loop: 10
+    }, 'https://api.twilio.com/cowbell.mp3');
+    const dial = response.dial();
+    dial.number('6692479616');
+    console.log(response.toString());
+    client.messages.create({body: `You asked for ${req.body.Body}. We found this.`, to: req.body.From, from: '+14086769926', mediaUrl: `http://musicmms.herokuapp.com/song/${videoName}.mp3`}).then((message) => process.stdout.write(message.sid));
+
   });
 };
