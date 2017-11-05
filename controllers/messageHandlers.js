@@ -39,9 +39,9 @@ exports.receivemsg = async(req, res) => {
   let result = await searcher.search(searchTerm, {type: 'video'});
   let videoLink = result.first.url;
   let videoName = uuidv4();
-  let fileName = '/home/mocha123/Documents/musicmms/res/video/' + videoName + '.mp4';
-  const audioOutput = '/home/mocha123/Documents/musicmms/res/audio/' + videoName + '.mp3';
-  const mainOutput = '/home/mocha123/Documents/musicmms/res/audio/' + uuidv4() + '.mp3';
+  let fileName = '/app/res/video/' + videoName + '.mp4';
+  const audioOutput = '/app/res/audio/' + videoName + '.mp3';
+  const mainOutput = '/app/res/audio/' + uuidv4() + '.mp3';
   console.log(videoName)
   ytdl(videoLink, {
     filter: format => {
