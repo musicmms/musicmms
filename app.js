@@ -2,9 +2,12 @@ const express = require('express');
 const app = express();
 const routes = require('./routes/index');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+express.static(path.join(__dirname + '/res'))
 
 require('dotenv').config();
 app.use('/', routes);

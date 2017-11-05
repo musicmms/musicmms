@@ -40,26 +40,13 @@ exports.sendmsg = (req, res) => {
 
 exports.receivemsg = async (req, res) => {
     console.log("Message received!");
+    console.log(req.body.Body)
     const twiml = new MessagingResponse();
     const searchTerm = req.body.Body;
     let result = await searcher.search(searchTerm, { type: 'video' });
     let videoLink = result.first.url;
     let videoName = uuidv4();
-    ytdl(videoLink).pipe(fs.createWriteStream('musicmms/res/video/' + videoName + '.mp4'));
-    try {
-        var process = new ffmpeg('musicmms/res/video/' + videoName + '.mp4');
-        process.then(function (video) {
-            // Callback mode
-            video.fnExtractSoundToMP3('musicmms/res/audio/' + videoName + '.mp3', function (error, file) {
-                if (!error) console.log('Audio file: ' + file);
-            });
-        }, function (err) {
-            console.log('Error: ' + err);
-        }).then(function () {
-            fs.unlink('musicmms/res/video/' + videoName + '.mp4')
-        });
-    } catch (e) {
-        console.log(e.code);
-        console.log(e.msg);
-    }
+    await ytdl(videoLink).pipe(fs.createWriteStream('/app/musicmms/res/video/' + videoName + '.mp4'));
+    
+    console.log('downloaded?')
 }
