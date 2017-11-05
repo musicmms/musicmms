@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SMS } from '@ionic-native/sms';
+import { MusicPage } from '../music/music';
 
 @Component({
   selector: 'page-home',
@@ -24,6 +25,10 @@ export class HomePage {
       }, () => {
         alert("failed");
       });
+    this.navCtrl.push(MusicPage, {
+      song: this.songName
+    });
+
   }
 
 }
