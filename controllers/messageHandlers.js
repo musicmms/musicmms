@@ -47,8 +47,7 @@ exports.receivemsg = async(req, res) => {
   ytdl(videoLink, {
     filter: format => {
       return format.container === 'mp4' && !format.encoding;
-    },
-    itag: '18'
+    }
   }).pipe(fs.createWriteStream(audioOutput)).on('finish', () => {
 
     const twiml = new VoiceResponse();
@@ -58,6 +57,7 @@ exports.receivemsg = async(req, res) => {
     twiml.play({
       loop: 10
     }, 'https://musicmms.herokuapp.com/song/' + videoName + '.mp3');
+    console.log('https://musicmms.herokuapp.com/song/' + videoName + '.mp3')
     console.log(twiml.toString())
     // Render the response as XML in reply to the webhook request
     console.log('http://urlecho.appspot.com/echo?status=200&Content-Type=application%2Fxml&body=' + encodeURI(twiml.toString()))
