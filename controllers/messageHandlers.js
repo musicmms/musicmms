@@ -36,7 +36,7 @@ exports.sendmsg = (req, res) => {
         .then((message) => res.send(`Sent message with id ${message.sid}`));
 }
 
-exports.receivemsg = (req, res) {
+exports.receivemsg = (req, res) => {
     console.log("Message received!");
     const twiml = new MessagingResponse();
     const opts = {
