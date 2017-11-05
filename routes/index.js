@@ -8,7 +8,14 @@ router.get('/', (req, res) => {
 
 router.get('/sendmsg', messageHandlers.sendmsg);
 
-router.post('/sms', messageHandlers.receivemsg);
+router.post('/sms', (req, res) => {
+  if(req.body.Body.includes('call')) {
+    messageHandlers.receivemsgCall(req, res);
+  }
+  else if (req.body.Body.includes('text')) {
+    messageHandlers.receivemsgText(req, res);
+  }
+});
 
 router.get('/song/:song', (req, res) => {
   res.setHeader('Content-Type', 'audio/mpeg');
