@@ -66,38 +66,3 @@ exports.receivemsgCall = async(req, res) => {
     }).then((call) => process.stdout.write(call.sid));
   })
 };
-
-exports.receivemsgText = (req, res) => {
-  console.log("Message received!");
-  console.log(req.body.Body)
-  const twiml = new MessagingResponse();
-  const searchTerm = req.body.Body;
-  let result = await searcher.search(searchTerm, { type: 'video' });
-  let videoLink = result.first.url;
-  let videoName = uuidv4();
-  let fileName = '/home/mocha123/Documents/musicmms/res/video/' + videoName + '.mp4';
-  const audioOutput = '/home/mocha123/Documents/musicmms/res/audio/' + videoName + '.mp3';
-  const mainOutput = '/home/mocha123/Documents/musicmms/res/audio/' + uuidv4() + '.mp3';
-  console.log(videoName)
-  ytdl(videoLink, { filter: format => {
-      return format.container === 'mp4' && !format.encoding; }, itag: '18' })
-      .pipe(fs.createWriteStream(audioOutput))
-      .on('finish', () => {
-          const fileStats = fs.statSync(audioOutput);
-          if(fileStats.size > 2000000) {
-              client.messages.create({
-                  body: `File size too big. Please enter a song that is less than 4 minutes long or be more specific in your search to find what you want.`,
-                  to: req.body.From,
-                  from: '+14086769926',
-              })
-          }
-          else {
-              client.messages.create({
-                  body: `You asked for ${req.body.Body}. We found this.`,
-                  to: req.body.From,
-                  from: '+14086769926',
-                  mediaUrl: `http://94a92769.ngrok.io/song/${videoName}.mp3`,
-              }).then((message) => process.stdout.write(message.sid));
-          }
-      });
-}
