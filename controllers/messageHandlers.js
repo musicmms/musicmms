@@ -38,7 +38,7 @@ exports.sendmsg = (req, res) => {
         .then((message) => res.send(`Sent message with id ${message.sid}`));
 }
 
-exports.receivemsg = (req, res) => {
+exports.receivemsg = async (req, res) => {
     console.log("Message received!");
     const twiml = new MessagingResponse();
     const searchTerm = req.body.Body;
