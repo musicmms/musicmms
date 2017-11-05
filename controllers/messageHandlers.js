@@ -55,7 +55,7 @@ exports.receivemsg = async(req, res) => {
     twiml.say({
       voice: 'alice'
     }, 'Playing song');
-    console.log(twiml.toString)
+    console.log(twiml.toString())
     // Render the response as XML in reply to the webhook request
     client.calls.create({
       url: 'http://urlecho.appspot.com/echo?status=200&Content-Type=Application%2Fxml&body=' + twiml.toString(),
