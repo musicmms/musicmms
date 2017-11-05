@@ -36,7 +36,7 @@ exports.sendmsg = (req, res) => {
         .then((message) => res.send(`Sent message with id ${message.sid}`));
 }
 
-exports.receivemsg = async (req, res) => {
+exports.receivemsg = async function(req, res) {
     console.log("Message received!");
     const twiml = new MessagingResponse();
     console.log(JSON.stringify(req.body))
