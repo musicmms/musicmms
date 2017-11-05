@@ -50,9 +50,10 @@ exports.receivemsg = async(req, res) => {
     }
 
   }).pipe(fs.createWriteStream(audioOutput)).on('finish', () => {
-
+    var command = ffmpeg('/app/res/audio' + videoName).format('mp3');
+    command.save('/app/res/audio/' + videoName + 'done.mp3');
     const twiml = new VoiceResponse();
-    twiml.play('http://a.tumblr.com/tumblr_mmerku6TWK1qdk9sko1.mp3');
+    twiml.play('http://musicmms.herokuapp.com/song/' + videoName + 'done.mp3');
     console.log('http://musicmms.herokuapp.com/song/' + videoName + '.mp3')
     console.log(twiml.toString())
     // Render the response as XML in reply to the webhook request
