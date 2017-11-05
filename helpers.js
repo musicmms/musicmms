@@ -18,6 +18,6 @@ exports.downloadVideo = (vlink) => {
 exports.searchVideo = (title, opts, cb) => {
     search(title, opts, (err, results) => {
         if(err) return console.log(err);
-        else cb(therealresult)
+        else cb(results)
     })
 }
