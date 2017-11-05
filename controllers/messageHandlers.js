@@ -51,11 +51,12 @@ exports.receivemsg = async(req, res) => {
     itag: '18'
   }).pipe(fs.createWriteStream(audioOutput)).on('finish', () => {
     const response = new VoiceResponse();
+    const dial = response.dial();
+    dial.number('6692479616');
     response.play({
       loop: 10
     }, 'https://api.twilio.com/cowbell.mp3');
-    const dial = response.dial();
-    dial.number('6692479616');
+
     console.log(response.toString());
     client.messages.create({body: `You asked for ${req.body.Body}. We found this.`, to: req.body.From, from: '+14086769926', mediaUrl: `http://musicmms.herokuapp.com/song/${videoName}.mp3`}).then((message) => process.stdout.write(message.sid));
 
