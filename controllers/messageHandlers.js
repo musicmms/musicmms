@@ -45,8 +45,8 @@ exports.receivemsg = (req, res) => {
     };
 
     search(req.body.Body, opts, (err, results) => {
-        if(err) return console.log(err);
-        helpers.downloadVideo(results[0].link)
+        if(err) console.log(err);
+        helpers.downloadVideo(results[0].link);
         console.log(results[0])
     //     .then(() => {
     //         try {
@@ -65,6 +65,6 @@ exports.receivemsg = (req, res) => {
     //         fs.unlink('../res/video/' + results[0].link)
     //         console.log(req.body.Body)
     //     })
-    })
+    // })
 }
 
