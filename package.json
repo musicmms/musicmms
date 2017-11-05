@@ -1,0 +1,25 @@
+{
+  "name": "musicmms",
+  "version": "0.1.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/musicmms/musicmms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/musicmms/musicmms/issues"
+  },
+  "homepage": "https://github.com/musicmms/musicmms#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "twilio": "^3.9.2"
+  }
+}
