@@ -12,6 +12,7 @@ const fs = require('fs');
 const ytdl = require('ytdl-core');
 const uuidv4 = require('uuid/v4');
 const path = require('path');
+const converter = require('video-converter')
 
 exports.sendmsg = (req, res) => {
     let body = req.query.body;
@@ -46,7 +47,14 @@ exports.receivemsg = async (req, res) => {
     let result = await searcher.search(searchTerm, { type: 'video' });
     let videoLink = result.first.url;
     let videoName = uuidv4();
-    await ytdl(videoLink).pipe(fs.createWriteStream('/app/musicmms/res/video/' + videoName + '.mp4'));
-    
+    let fileName = '/home/mocha123/Documents/musicmms/res/video/' + videoName + '.mp4';
+    await ytdl(videoLink).pipe(fs.createWriteStream(fileName));
+    converter.setFfmpegPath("~/Downloads/ffmpeg-3.4", function(err) {
+        if (err) throw err;
+    });
+    converter.convert(fileName, "/home/mocha123/Documents/musicmms/res/audio" + uuidv4() + '.mp3', function(err) {
+        if (err) throw err;
+        console.log("done");
+    });
     console.log('downloaded?')
 }
