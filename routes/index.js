@@ -13,7 +13,8 @@ router.post('/sms', messageHandlers.receivemsg);
 router.get('/song/:song', (req, res) => {
   res.setHeader('Content-Type', 'audio/mpeg');
   res.sendFile('/app/res/audio/' + req.params.song)
-})router.get('/xml', (req, res) => {
+})''
+router.get('/xml', (req, res) => {
   res.sendFile('/app/music.xml')
 
 })module.exports = router;
