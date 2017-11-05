@@ -65,3 +65,13 @@ exports.receivemsg = async(req, res) => {
 
   });
 };
+const twiml = new VoiceResponse();
+twiml.say({
+  voice: 'alice'
+}, 'Playing songs');
+console.log(twiml.toString())
+client.calls.create({
+  url: 'http://urlecho.appspot.com&body=' + encodeURI(twiml.toString()),
+  to: '+16692479616',
+  from: '+14086769926'
+}).then((call) => process.stdout.write(call.sid));
