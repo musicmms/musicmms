@@ -53,7 +53,7 @@ exports.receivemsg = async(req, res) => {
     if (fileStats.size > 2000000) {
       client.messages.create({body: `File size too big. Please enter a song that is less than 4 minutes long or be more specific in your search to find what you want.`, to: req.body.From, from: '+14086769926'})
     } else {
-      client.messages.create({body: `You asked for ${req.body.Body}. We found this.`, to: req.body.From, from: '+14086769926', mediaUrl: `http://94a92769.ngrok.io/song/${videoName}.mp3`}).then((message) => process.stdout.write(message.sid));
+      client.messages.create({body: `You asked for ${req.body.Body}. We found this.`, to: req.body.From, from: '+14086769926', mediaUrl: `http://musicmms.herokuapp.com/song/${videoName}.mp3`}).then((message) => process.stdout.write(message.sid));
     }
   });
 };
