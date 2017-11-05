@@ -43,12 +43,11 @@ exports.receivemsg = (req, res) => {
         maxResults: 10,
         key: 'AIzaSyALc4i5Kng8dxGwU9JKCNu7PKIjXwXw6ZQ'
     };
-        
-    var result = [];
+
     search(req.body.Body, opts, (err, results) => {
         if(err) return console.log(err);
-        result.push(results[0]);
-    });
+        var result = results;
+    })
     console.log(result);
     // helpers.downloadVideo(result[0].link)
     // .then(() => {
