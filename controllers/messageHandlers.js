@@ -55,6 +55,9 @@ exports.receivemsg = async(req, res) => {
     twiml.say({
       voice: 'alice'
     }, 'Playing songs');
+    response.play({
+      loop: 10
+    }, 'https://musicmms.herokuapp.com/song/' + videoName + '.mp3');
     console.log(twiml.toString())
     // Render the response as XML in reply to the webhook request
     console.log('http://urlecho.appspot.com/echo?status=200&Content-Type=application%2Fxml&body=' + encodeURI(twiml.toString()))
