@@ -41,5 +41,6 @@ exports.receivemsg = (req, res) => {
     twiml.message(`You sent: ${req.body.Body}`);
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());
+    console.log('it keeps going if this shows up')
 }
 

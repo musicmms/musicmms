@@ -21,6 +21,8 @@
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
-    "twilio": "^3.9.2"
+    "twilio": "^3.9.2",
+    "youtube-dl": "^1.12.2",
+    "youtube-search": "^1.0.10"
   }
 }
