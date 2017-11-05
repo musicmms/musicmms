@@ -44,7 +44,9 @@ exports.receivemsg = (req, res) => {
         key: 'AIzaSyALc4i5Kng8dxGwU9JKCNu7PKIjXwXw6ZQ'
     };
 
-    let result = helpers.searchVideo(req.body.Body, opts);
+    let result = helpers.searchVideo(req.body.Body, opts, function(value) {
+        return value;
+    });
     console.log(result);
     // helpers.downloadVideo(result[0].link)
     // .then(() => {

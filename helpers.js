@@ -1,6 +1,7 @@
 const fs = require('fs');
 const youtubedl = require('youtube-dl');
 const search = require('youtube-search');
+
 exports.downloadVideo = (vlink) => {
     let video = youtubedl(vlink,
     ['--format=18'],
@@ -14,9 +15,9 @@ exports.downloadVideo = (vlink) => {
     video.pipe(fs.createWriteStream('/res/video/' + info.filename + '.mp4')); 
 }
 
-exports.searchVideo = (title, opts) => {
+exports.searchVideo = (title, opts, cb) => {
     search(title, opts, (err, results) => {
         if(err) return console.log(err);
-        return results;
+        else cb(therealresult)
     })
 }
