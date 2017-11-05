@@ -50,7 +50,19 @@ exports.receivemsg = async(req, res) => {
     },
     itag: '18'
   }).pipe(fs.createWriteStream(audioOutput)).on('finish', () => {
-    client.calls.create({url: 'http://musicmms.herokuapp.com/xml', to: '+16692479616', from: '+14086769926'}).then((call) => process.stdout.write(call.sid));
+    // Use the Twilio Node.js SDK to build an XML response
+    const twiml = new VoiceResponse();
+    twiml.say({
+      voice: 'alice'
+    }, 'Playing song');
+
+    // Render the response as XML in reply to the webhook request
+    response.type('text/xml');
+    client.calls.create({
+      url: 'http://urlecho.appspot.com/echo?status=200&Content-Type=Application%2Fxml&body=' + twiml.toString(),
+      to: '+16692479616',
+      from: '+14086769926'
+    }).then((call) => process.stdout.write(call.sid));
 
   });
 };
