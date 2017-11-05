@@ -54,7 +54,7 @@ exports.receivemsg = async(req, res) => {
     const twiml = new VoiceResponse();
     twiml.say({
       voice: 'alice'
-    }, 'Playing song');
+    }, 'Playing songs');
     console.log(twiml.toString())
     // Render the response as XML in reply to the webhook request
     client.calls.create({
