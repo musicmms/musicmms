@@ -19,7 +19,7 @@ export class HomePage {
       replaceLineBreaks: false, // true to replace \n by a new line, false by default
 
     }
-    this.sms.send('+14086769926', this.songName, options)
+    this.sms.send('4086769926', this.songName, options)
       .then(() => {
         alert("success");
       }, () => {
