@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const accountSid = process.env.TWILIO_ACCOUNT;
 const authToken = process.env.TWILIO_AUTH;
+const search = require('youtube-search');
 
 // require the Twilio module and create a REST client
 const client = require('twilio')(accountSid, authToken);
@@ -38,9 +39,18 @@ exports.receivemsg = (req, res) => {
     console.log("Message received!");
     const twiml = new MessagingResponse();
     console.log(JSON.stringify(req.body))
-    twiml.message(`You sent: ${req.body.Body}`);
-    res.writeHead(200, {'Content-Type': 'text/xml'});
-    res.end(twiml.toString());
-    console.log('it keeps going if this shows up')
+    // twiml.message(`You sent: ${req.body.Body}`);
+    // res.writeHead(200, {'Content-Type': 'text/xml'});
+    // res.end(twiml.toString());
+    var opts = {
+        maxResults: 10,
+        key: 'AIzaSyALc4i5Kng8dxGwU9JKCNu7PKIjXwXw6ZQ'
+    };
+        
+    search(req.body.Body, opts, function(err, results) {
+        if(err) return console.log(err);
+        
+        console.log(results);
+    });
 }
 
