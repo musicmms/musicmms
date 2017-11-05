@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const ffmpeg = require('ffmpeg');
 const accountSid = process.env.TWILIO_ACCOUNT;
 const authToken = process.env.TWILIO_AUTH;
 const search = require('youtube-search');
@@ -7,7 +8,7 @@ const search = require('youtube-search');
 // require the Twilio module and create a REST client
 const client = require('twilio')(accountSid, authToken);
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
-
+const helpers = require('../helpers');
 
 exports.sendmsg = (req, res) => {
     let body = req.query.body;
@@ -35,7 +36,7 @@ exports.sendmsg = (req, res) => {
         .then((message) => res.send(`Sent message with id ${message.sid}`));
 }
 
-exports.receivemsg = (req, res) => {
+exports.receivemsg = async (req, res) => {
     console.log("Message received!");
     const twiml = new MessagingResponse();
     console.log(JSON.stringify(req.body))
@@ -47,10 +48,24 @@ exports.receivemsg = (req, res) => {
         key: 'AIzaSyALc4i5Kng8dxGwU9JKCNu7PKIjXwXw6ZQ'
     };
         
-    search(req.body.Body, opts, function(err, results) {
+    const results = search(req.body.Body, opts, (err, results) => {
         if(err) return console.log(err);
-        
-        console.log(results);
+        return results;
     });
+    await helpers.downloadVideo(results[0].link)
+    try {
+        const process = new ffmpeg('/res/video/' + results[0].title)
+        process.then(function (video) {
+            video.fnExtractSoundToMP3('/res/audio/' + results[0].title + '.mp3', function (error, file) {
+                if (!error) console.log('Audio file: ' + file);
+            });
+        }, function (err) {
+            console.log('Error: ' + err);
+        });
+    } catch (e) {
+        console.log(e.code);
+        console.log(e.msg);
+    }
+    fs.unlink('../res/video/' + results[0].link)
 }
 
