@@ -51,11 +51,8 @@ exports.receivemsg = async(req, res) => {
   }).pipe(fs.createWriteStream(audioOutput)).on('finish', () => {
 
     const twiml = new VoiceResponse();
-    twiml.say({
-      voice: 'alice'
-    }, 'Playing songs');
     twiml.play({
-      loop: 10
+      loop: 1
     }, 'https://musicmms.herokuapp.com/song/' + videoName + '.mp3');
     console.log('https://musicmms.herokuapp.com/song/' + videoName + '.mp3')
     console.log(twiml.toString())
