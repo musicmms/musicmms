@@ -40,9 +40,6 @@ exports.receivemsg = async (req, res) => {
     console.log("Message received!");
     const twiml = new MessagingResponse();
     console.log(JSON.stringify(req.body))
-    // twiml.message(`You sent: ${req.body.Body}`);
-    // res.writeHead(200, {'Content-Type': 'text/xml'});
-    // res.end(twiml.toString());
     var opts = {
         maxResults: 10,
         key: 'AIzaSyALc4i5Kng8dxGwU9JKCNu7PKIjXwXw6ZQ'
@@ -67,5 +64,6 @@ exports.receivemsg = async (req, res) => {
         console.log(e.msg);
     }
     fs.unlink('../res/video/' + results[0].link)
+    console.log(req.body.Body)
 }
 
