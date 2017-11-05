@@ -11,8 +11,8 @@ router.get('/sendmsg', messageHandlers.sendmsg);
 router.post('/sms', messageHandlers.receivemsg);
 
 router.get('/song/:song', (req, res) => {
-  res.setHeader("Content-Type", 'audio/mpeg'); //Solution!
-  res.sendFile('/app/res/audio/' + req.params.song)
+  res.setHeader('Content-Type', 'audio/mpeg');
+  res.sendFile('/app/res/audios/' + req.params.song)
 })
 router.get('/xml', (req, res) => {
   res.sendFile('/app/music.xml')
