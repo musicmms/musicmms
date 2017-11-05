@@ -48,23 +48,6 @@ exports.receivemsg = (req, res) => {
         if(err) console.log(err);
         helpers.downloadVideo(results[0].link);
         console.log(results[0])
-    //     .then(() => {
-    //         try {
-    //             const process = new ffmpeg('/res/video/' + results[0].title)
-    //             process.then(function (video) {
-    //                 video.fnExtractSoundToMP3('/res/audio/' + results[0].title + '.mp3', function (error, file) {
-    //                     if (!error) console.log('Audio file: ' + file);
-    //                 });
-    //             }, function (err) {
-    //                 console.log('Error: ' + err);
-    //             });
-    //         } catch (e) {
-    //             console.log(e.code);
-    //             console.log(e.msg);
-    //         }
-    //         fs.unlink('../res/video/' + results[0].link)
-    //         console.log(req.body.Body)
-    //     })
     })
 }
 
