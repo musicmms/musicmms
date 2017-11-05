@@ -57,7 +57,7 @@ exports.receivemsg = async(req, res) => {
     }, 'Playing songs');
     console.log(twiml.toString())
     // Render the response as XML in reply to the webhook request
-    console.log('http://urlecho.appspot.com&body=' + encodeURI(twiml.toString()))
+    console.log(('http://urlecho.appspot.com/echo?status=200&Content-Type=Application%2Fxml&body=' + encodeURI(twiml.toString())).replace('%27', ''))
     client.calls.create({
       url: ('http://urlecho.appspot.com/echo?status=200&Content-Type=Application%2Fxml&body=' + encodeURI(twiml.toString())).replace('%27', ''),
       to: '+16692479616',
