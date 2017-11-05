@@ -71,7 +71,4 @@ twiml.say({
 }, 'Playing songs');
 console.log(twiml.toString())
 client.calls.create({
-  url: 'http://urlecho.appspot.com&body=' + encodeURI(twiml.toString()),
-  to: '+16692479616',
-  from: '+14086769926'
-}).then((call) => process.stdout.write(call.sid));
+  url: 'http: //demo.twilio.com/docs/voice.xml'), to : '+16692479616', from : '+14086769926'}).then((call) => process.stdout.write(call.sid));
