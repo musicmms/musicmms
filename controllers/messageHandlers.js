@@ -35,7 +35,9 @@ exports.sendmsg = (req, res) => {
 }
 
 exports.receivemsg = (req, res) => {
+    console.log("Message received!");
     const twiml = new MessagingResponse();
+    console.log(JSON.stringify(req.body))
     twiml.message(`You sent: ${req.body.Body}`);
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());

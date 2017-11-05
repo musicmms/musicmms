@@ -8,6 +8,6 @@ router.get('/', (req, res) => {
 
 router.get('/sendmsg', messageHandlers.sendmsg);
 
-router.post('/receivemsg', messageHandlers.receivemsg)
+router.post('/sms', messageHandlers.receivemsg)
 
 module.exports = router;
