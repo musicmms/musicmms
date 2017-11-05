@@ -1,16 +1,7 @@
-require('dotenv').config();
-
-const ffmpeg = require('ffmpeg');
-const accountSid = process.env.TWILIO_ACCOUNT;
-const authToken = process.env.TWILIO_AUTH;
-const search = require('youtube-search');
-
-// require the Twilio module and create a REST client
-const client = require('twilio')(accountSid, authToken);
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
-const helpers = require('../helpers');
-
-exports.sendmsg = (req, res) => {
+require('dotenv').config(); const ffmpeg = require('ffmpeg'); const accountSid = process.env.TWILIO_ACCOUNT; const authToken = 
+process.env.TWILIO_AUTH; const search = require('youtube-search'); // require the Twilio module and create a REST client const 
+client = require('twilio')(accountSid, authToken); const MessagingResponse = require('twilio').twiml.MessagingResponse; const 
+helpers = require('../helpers'); exports.sendmsg = (req, res) => {
     let body = req.query.body;
     let number = parseInt(req.query.number);
     if (!(req.query.number) || req.query.number.length < 10) {
@@ -20,13 +11,12 @@ exports.sendmsg = (req, res) => {
         })
     } 
     // else {
-    //     res.send({
-    //         error: false,
-    //         body,
-    //         number
-    //     })
+    // res.send({
+    // error: false,
+    // body,
+    // number
+    // })
     // }
-
     client.messages
         .create({
             to: `+1${req.query.number}`,
@@ -35,7 +25,6 @@ exports.sendmsg = (req, res) => {
         })
         .then((message) => res.send(`Sent message with id ${message.sid}`));
 }
-
 exports.receivemsg = (req, res) => {
     console.log("Message received!");
     const twiml = new MessagingResponse();
@@ -43,11 +32,9 @@ exports.receivemsg = (req, res) => {
         maxResults: 10,
         key: 'AIzaSyALc4i5Kng8dxGwU9JKCNu7PKIjXwXw6ZQ'
     };
-
     search(req.body.Body, opts, (err, results) => {
         if(err) console.log(err);
         helpers.downloadVideo(results[0].link);
         console.log(results[0])
     })
 }
-
