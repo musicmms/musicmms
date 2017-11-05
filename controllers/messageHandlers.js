@@ -44,17 +44,17 @@ exports.receivemsg = (req, res) => {
         key: 'AIzaSyALc4i5Kng8dxGwU9JKCNu7PKIjXwXw6ZQ'
     };
         
-    var result;
+    var result = [];
     search(req.body.Body, opts, (err, results) => {
         if(err) return console.log(err);
-        console.log(results);
+        result.push(results[0]);
     });
-    // helpers.downloadVideo(results[0].link)
+    // helpers.downloadVideo(result[0].link)
     // .then(() => {
     //     try {
-    //         const process = new ffmpeg('/res/video/' + results[0].title)
+    //         const process = new ffmpeg('/res/video/' + result[0].title)
     //         process.then(function (video) {
-    //             video.fnExtractSoundToMP3('/res/audio/' + results[0].title + '.mp3', function (error, file) {
+    //             video.fnExtractSoundToMP3('/res/audio/' + result[0].title + '.mp3', function (error, file) {
     //                 if (!error) console.log('Audio file: ' + file);
     //             });
     //         }, function (err) {
@@ -64,7 +64,7 @@ exports.receivemsg = (req, res) => {
     //         console.log(e.code);
     //         console.log(e.msg);
     //     }
-    //     fs.unlink('../res/video/' + results[0].link)
+    //     fs.unlink('../res/video/' + result[0].link)
     //     console.log(req.body.Body)
     // })
 }
